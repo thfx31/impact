@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Choisis ton impact</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f0f4f7;
+      color: #333;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .scenario {
+      margin-bottom: 30px;
+    }
+    .choices {
+      display: flex;
+      gap: 20px;
+      margin-top: 10px;
+    }
+    .choice {
+      flex: 1;
+      padding: 15px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .choice:hover {
+      border-color: #0077cc;
+      background: #e6f2ff;
+    }
+    .result {
+      display: none;
+      margin-top: 15px;
+      font-weight: bold;
+      color: green;
+    }
+    .final-score {
+      margin-top: 30px;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>✨ Choisis ton impact !</h1>
+  <p>Sensibilise-toi aux usages positifs de l'IA pour la planète.</p>
+
+  <div class="scenario" id="scenario1">
+    <h2>🚚 Livraison de colis</h2>
+    <p>Comment livrer un colis en ville ?</p>
+    <div class="choices">
+      <div class="choice" onclick="selectChoice(1, 0)">A. Camion diesel avec itinéraire fixe</div>
+      <div class="choice" onclick="selectChoice(1, 2)">B. IA qui optimise selon le trafic</div>
+    </div>
+    <div class="result" id="result1"></div>
+  </div>
+
+  <div class="scenario" id="scenario2">
+    <h2>💧 Arrosage agricole</h2>
+    <p>Comment arroser un champ en été ?</p>
+    <div class="choices">
+      <div class="choice" onclick="selectChoice(2, 0)">A. Arrosage fixe</div>
+      <div class="choice" onclick="selectChoice(2, 150)">B. IA selon la météo</div>
+    </div>
+    <div class="result" id="result2"></div>
+  </div>
+
+  <div class="scenario" id="scenario3">
+    <h2>🏢 Chauffage de bâtiment</h2>
+    <p>Comment chauffer les bureaux ?</p>
+    <div class="choices">
+      <div class="choice" onclick="selectChoice(3, 0)">A. Température fixe</div>
+      <div class="choice" onclick="selectChoice(3, 30)">B. IA adaptative</div>
+    </div>
+    <div class="result" id="result3"></div>
+  </div>
+
+  <div class="final-score" id="score"></div>
+</div>
+
+<script>
+  let score = 0;
+  let answered = 0;
+
+  function selectChoice(id, gain) {
+    const result = document.getElementById(`result${id}`);
+    if (result.style.display === "block") return;
+    result.innerText = gain > 0 ? `Bravo ! Gain écologique : +${gain}` : "Pas d'amélioration écologique.";
+    result.style.display = "block";
+    score += gain;
+    answered++;
+    if (answered === 3) {
+      document.getElementById("score").innerText = `⭐ Score final : +${score} (unités écologiques cumulées)`;
+    }
+  }
+</script>
+</body>
+</html>
