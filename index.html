@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Choisis ton impact</title>
+  <title>ÉcoIA – Choisis ton impact</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -54,37 +54,68 @@
 </head>
 <body>
 <div class="container">
-  <h1>✨ Choisis ton impact !</h1>
-  <p>Sensibilise-toi aux usages positifs de l'IA pour la planète.</p>
+  <h1>🌍 ÉcoIA – Choisis ton impact !</h1>
+  <p>Joue et découvre comment l'intelligence artificielle peut réduire ton empreinte écologique.</p>
 
+  <!-- Scénarios (6) -->
   <div class="scenario" id="scenario1">
     <h2>🚚 Livraison de colis</h2>
     <p>Comment livrer un colis en ville ?</p>
     <div class="choices">
-      <div class="choice" onclick="selectChoice(1, 0)">A. Camion diesel avec itinéraire fixe</div>
-      <div class="choice" onclick="selectChoice(1, 2)">B. IA qui optimise selon le trafic</div>
+      <div class="choice" onclick="selectChoice(1, 0)">A. Camion diesel</div>
+      <div class="choice" onclick="selectChoice(1, 2)">B. Itinéraire optimisé par IA</div>
     </div>
     <div class="result" id="result1"></div>
   </div>
 
   <div class="scenario" id="scenario2">
     <h2>💧 Arrosage agricole</h2>
-    <p>Comment arroser un champ en été ?</p>
+    <p>Comment arroser un champ ?</p>
     <div class="choices">
       <div class="choice" onclick="selectChoice(2, 0)">A. Arrosage fixe</div>
-      <div class="choice" onclick="selectChoice(2, 150)">B. IA selon la météo</div>
+      <div class="choice" onclick="selectChoice(2, 150)">B. IA météo + humidité</div>
     </div>
     <div class="result" id="result2"></div>
   </div>
 
   <div class="scenario" id="scenario3">
     <h2>🏢 Chauffage de bâtiment</h2>
-    <p>Comment chauffer les bureaux ?</p>
+    <p>Comment chauffer des bureaux ?</p>
     <div class="choices">
-      <div class="choice" onclick="selectChoice(3, 0)">A. Température fixe</div>
+      <div class="choice" onclick="selectChoice(3, 0)">A. Chauffage constant</div>
       <div class="choice" onclick="selectChoice(3, 30)">B. IA adaptative</div>
     </div>
     <div class="result" id="result3"></div>
+  </div>
+
+  <div class="scenario" id="scenario4">
+    <h2>💡 Éclairage public</h2>
+    <p>Comment gérer les lampadaires d’une ville ?</p>
+    <div class="choices">
+      <div class="choice" onclick="selectChoice(4, 0)">A. Horaires fixes</div>
+      <div class="choice" onclick="selectChoice(4, 20)">B. Détection par IA</div>
+    </div>
+    <div class="result" id="result4"></div>
+  </div>
+
+  <div class="scenario" id="scenario5">
+    <h2>🗑️ Tri des déchets</h2>
+    <p>Comment améliorer le tri des déchets ?</p>
+    <div class="choices">
+      <div class="choice" onclick="selectChoice(5, 0)">A. Tri manuel</div>
+      <div class="choice" onclick="selectChoice(5, 40)">B. Tri assisté par IA</div>
+    </div>
+    <div class="result" id="result5"></div>
+  </div>
+
+  <div class="scenario" id="scenario6">
+    <h2>📦 Emballages en ligne</h2>
+    <p>Comment expédier les commandes e-commerce ?</p>
+    <div class="choices">
+      <div class="choice" onclick="selectChoice(6, 0)">A. Emballage standard</div>
+      <div class="choice" onclick="selectChoice(6, 10)">B. IA qui optimise le volume</div>
+    </div>
+    <div class="result" id="result6"></div>
   </div>
 
   <div class="final-score" id="score"></div>
@@ -93,17 +124,28 @@
 <script>
   let score = 0;
   let answered = 0;
+  const total = 6;
 
   function selectChoice(id, gain) {
     const result = document.getElementById(`result${id}`);
     if (result.style.display === "block") return;
-    result.innerText = gain > 0 ? `Bravo ! Gain écologique : +${gain}` : "Pas d'amélioration écologique.";
+    result.innerText = gain > 0 ? `✅ Gain écologique : +${gain}` : "❌ Aucun bénéfice écologique.";
     result.style.display = "block";
     score += gain;
     answered++;
-    if (answered === 3) {
-      document.getElementById("score").innerText = `⭐ Score final : +${score} (unités écologiques cumulées)`;
+    if (answered === total) showFinal();
+  }
+
+  function showFinal() {
+    let message = "";
+    if (score <= 50) {
+      message = "🌱 Profil : Explorateur en devenir – Tu découvres encore les possibilités de l'IA pour l'écologie.";
+    } else if (score <= 150) {
+      message = "♻️ Profil : Ambassadeur IA verte – Tu as un bon sens éco-responsable assisté par l'IA.";
+    } else {
+      message = "🚀 Profil : Architecte de demain – Tu sais utiliser l'IA pour transformer le monde durablement.";
     }
+    document.getElementById("score").innerText = `⭐ Score final : ${score}\n${message}`;
   }
 </script>
 </body>
